@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Letícia Nepomuceno — Design & Lógica</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Space+Mono:wght@400;700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#100f0d;
+    --panel:#191815;
+    --paper:#f0ebdf;
+    --ink:#f0ebdf;
+    --ink-dim:#a29d8f;
+    --orange:#ff4713;
+    --acid:#e8ff3c;
+    --line:#3a372f;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;
+    background:
+      radial-gradient(circle, rgba(240,235,223,0.05) 1px, transparent 1px) 0 0/22px 22px,
+      var(--bg);
+    color:var(--ink);
+    font-family:'Work Sans',sans-serif;
+    -webkit-font-smoothing:antialiased;
+    overflow-x:hidden;
+  }
+  .stamp-font{font-family:'Anton',sans-serif;}
+  .display{font-family:'Archivo Black',sans-serif;}
+  .tag-font{font-family:'Space Mono',monospace;}
+  ::selection{ background:var(--orange); color:var(--bg);}
+
+  .topbar{
+    position:sticky; top:0; z-index:50;
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+    background:rgba(16,15,13,0.92);
+    backdrop-filter:blur(4px);
+    border-bottom:2px dashed var(--line);
+  }
+  .logo{ display:flex; align-items:center; gap:10px;}
+  .logo .box{
+    width:26px;height:26px;background:var(--orange);
+    display:flex;align-items:center;justify-content:center;
+    font-family:'Anton',sans-serif; font-size:14px; color:var(--bg);
+    transform:rotate(-6deg);
+  }
+  .logo span{ font-family:'Space Mono',monospace; font-size:13px; letter-spacing:.03em; text-transform:uppercase;}
+  .topbar nav{ display:flex; gap:22px;}
+  .topbar nav a{
+    color:var(--ink-dim); text-decoration:none; font-size:11.5px;
+    font-family:'Space Mono',monospace; text-transform:uppercase; letter-spacing:.06em;
+  }
+  .topbar nav a:hover{ color:var(--acid);}
+
+  .hero{ padding:70px 28px 40px; position:relative;}
+  .hero-inner{ max-width:1080px; margin:0 auto; position:relative;}
+  .drop-tag{
+    display:inline-flex; align-items:center; gap:8px;
+    font-family:'Space Mono',monospace; font-size:11px; letter-spacing:.08em; text-transform:uppercase;
+    color:var(--bg); background:var(--acid);
+    padding:6px 12px; transform:rotate(-2deg);
+    margin-bottom:30px;
+  }
+  h1.mega{
+    font-size:clamp(48px,10vw,128px);
+    line-height:0.88; margin:0; text-transform:uppercase;
+    letter-spacing:-0.01em;
+  }
+  h1.mega .line1{ color:var(--ink);}
+  h1.mega .line2{
+    color:var(--bg);
+    -webkit-text-stroke:2px var(--ink);
+    display:inline-block;
+  }
+  .hero-sub{
+    max-width:520px; margin:28px 0 0; font-size:16px; line-height:1.65; color:var(--ink-dim);
+  }
+  .role-chips{ display:flex; flex-wrap:wrap; gap:10px; margin-top:26px;}
+  .chip{
+    font-family:'Space Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.05em;
+    padding:7px 12px; border:1.5px solid var(--ink); color:var(--ink);
+    box-shadow:4px 4px 0 var(--orange);
+  }
+  .stamp{
+    position:absolute; top:20px; right:20px;
+    width:118px; height:118px; border:2px solid var(--acid); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    transform:rotate(8deg);
+    font-family:'Space Mono',monospace; font-size:9.5px; color:var(--acid);
+    letter-spacing:.05em; text-transform:uppercase; line-height:1.5;
+    padding:10px;
+  }
+
+  .perf{
+    max-width:1080px; margin:50px auto 0; padding:0 28px;
+    border-top:2px dashed var(--line);
+    display:flex; justify-content:space-between;
+    font-family:'Space Mono',monospace; font-size:10px; color:var(--ink-dim);
+  }
+  .perf span{ background:var(--bg); padding:6px 10px; transform:translateY(-9px);}
+
+  section{ max-width:1080px; margin:0 auto; padding:70px 28px;}
+  .sec-head{ display:flex; align-items:baseline; gap:14px; margin-bottom:36px;}
+  .sec-num{ font-family:'Space Mono',monospace; font-size:12px; color:var(--orange);}
+  .sec-title{ font-family:'Archivo Black',sans-serif; font-size:34px; text-transform:uppercase; margin:0;}
+
+  .ficha{ display:grid; grid-template-columns:1.15fr 0.85fr; gap:40px;}
+  .ficha p{ font-size:16px; line-height:1.8; color:#d8d3c4; margin:0 0 18px;}
+  .spec{
+    border:2px solid var(--ink); background:var(--panel);
+    padding:0; height:fit-content;
+  }
+  .spec-title{
+    background:var(--ink); color:var(--bg); font-family:'Space Mono',monospace;
+    font-size:11px; text-transform:uppercase; letter-spacing:.08em; padding:8px 14px;
+  }
+  .spec-row{
+    display:flex; justify-content:space-between; padding:12px 14px;
+    border-bottom:1px dashed var(--line); font-family:'Space Mono',monospace; font-size:12.5px;
+  }
+  .spec-row:last-child{ border-bottom:none;}
+  .spec-row .k{ color:var(--ink-dim); text-transform:uppercase; letter-spacing:.04em;}
+
+  .patches-wrap{ display:grid; grid-template-columns:1fr 1fr; gap:24px;}
+  .patch-panel{
+    border:2px solid var(--ink); padding:22px; background:var(--panel);
+    position:relative;
+  }
+  .patch-panel::before{
+    content:attr(data-side);
+    position:absolute; top:-13px; left:16px; background:var(--bg);
+    font-family:'Space Mono',monospace; font-size:11px; text-transform:uppercase;
+    padding:0 8px; letter-spacing:.08em;
+  }
+  .patch-panel.design::before{ color:var(--orange);}
+  .patch-panel.logic::before{ color:var(--acid);}
+  .patch-list{ display:flex; flex-wrap:wrap; gap:10px; margin-top:6px;}
+  .patch{
+    font-family:'Space Mono',monospace; font-size:11px; text-transform:uppercase; letter-spacing:.03em;
+    padding:8px 12px; border:1.5px dashed var(--line); color:var(--ink);
+  }
+  .patch-panel.design .patch:hover{ border-color:var(--orange); color:var(--orange);}
+  .patch-panel.logic .patch:hover{ border-color:var(--acid); color:var(--acid);}
+
+  .tags-grid{ display:grid; grid-template-columns:repeat(3,1fr); gap:26px;}
+  .hangtag{
+    background:var(--paper); color:var(--bg);
+    padding:22px 18px 26px; position:relative;
+    box-shadow:6px 6px 0 var(--line);
+    clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%, 0 18%);
+  }
+  .hangtag .hole{
+    width:14px; height:14px; border:2px solid var(--bg); border-radius:50%;
+    position:absolute; top:10px; left:10px; background:var(--paper);
+  }
+  .hangtag .idx{ font-family:'Space Mono',monospace; font-size:10.5px; letter-spacing:.06em; text-transform:uppercase; color:#6b675c; margin-bottom:14px; padding-left:14px;}
+  .hangtag h3{ margin:0 0 8px; font-family:'Archivo Black',sans-serif; font-size:16px; text-transform:uppercase;}
+  .hangtag p{ margin:0 0 14px; font-size:13px; line-height:1.55; color:#4b483f;}
+  .hangtag .ext{
+    display:inline-block; font-family:'Space Mono',monospace; font-size:10.5px;
+    background:var(--bg); color:var(--acid); padding:4px 8px;
+  }
+
+  .cert{
+    border:2px solid var(--ink); background:var(--panel); padding:28px 26px;
+    display:flex; align-items:center; gap:26px; flex-wrap:wrap;
+  }
+  .cert-stamp{
+    width:82px; height:82px; border:2px solid var(--orange); border-radius:50%;
+    display:flex; align-items:center; justify-content:center; text-align:center;
+    font-family:'Anton',sans-serif; font-size:11px; color:var(--orange);
+    transform:rotate(-8deg); flex-shrink:0; line-height:1.2; text-transform:uppercase;
+  }
+  .cert h3{ margin:0 0 6px; font-family:'Archivo Black',sans-serif; font-size:18px; text-transform:uppercase;}
+  .cert p{ margin:0; color:var(--ink-dim); font-family:'Space Mono',monospace; font-size:12px; text-transform:uppercase; letter-spacing:.04em;}
+
+  .ticket{
+    border:2px dashed var(--ink); padding:36px 30px; display:flex; justify-content:space-between;
+    align-items:center; flex-wrap:wrap; gap:24px; position:relative;
+  }
+  .ticket::before, .ticket::after{
+    content:''; width:26px; height:26px; background:var(--bg); border-radius:50%;
+    position:absolute; top:50%; transform:translateY(-50%);
+  }
+  .ticket::before{ left:-14px;}
+  .ticket::after{ right:-14px;}
+  .ticket h2{ font-family:'Archivo Black',sans-serif; font-size:30px; text-transform:uppercase; margin:0 0 10px;}
+  .ticket p{ margin:0; color:var(--ink-dim); max-width:380px; line-height:1.6; font-size:14px;}
+  .ticket-links{ display:flex; flex-direction:column; gap:10px;}
+  .ticket-links a{
+    font-family:'Space Mono',monospace; font-size:13px; text-transform:uppercase; letter-spacing:.04em;
+    color:var(--ink); text-decoration:none; border-bottom:1.5px solid var(--line); padding-bottom:2px; width:fit-content;
+  }
+  .ticket-links a:hover{ border-color:var(--orange); color:var(--orange);}
+
+  footer{
+    text-align:center; padding:30px 20px; font-family:'Space Mono',monospace; font-size:10.5px;
+    color:var(--ink-dim); text-transform:uppercase; letter-spacing:.08em; border-top:2px dashed var(--line);
+  }
+
+  @media (max-width:760px){
+    .ficha, .patches-wrap{ grid-template-columns:1fr;}
+    .tags-grid{ grid-template-columns:1fr;}
+    .stamp{ display:none;}
+    .topbar nav{ display:none;}
+    h1.mega{ font-size:56px;}
+  }
+</style>
+</head>
+<body>
+
+  <div class="topbar">
+    <div class="logo">
+      <div class="box stamp-font">L</div>
+      <span>leticia.nepomuceno</span>
+    </div>
+    <nav>
+      <a href="#sobre">ficha</a>
+      <a href="#skills">patches</a>
+      <a href="#projetos">peças</a>
+      <a href="#formacao">cert.</a>
+      <a href="#contato">contato</a>
+    </nav>
+  </div>
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="stamp">100% autêntica · tads · ifnmg · araçuaí</div>
+      <div class="drop-tag">drop 01 — visual x lógica</div>
+      <h1 class="mega">
+        <span class="line1">LETÍCIA</span><br>
+        <span class="line2">NEPOMUCENO</span>
+      </h1>
+      <p class="hero-sub">Design gráfico e artes visuais de um lado, lógica de programação do outro. Duas linguagens, uma só assinatura.</p>
+      <div class="role-chips">
+        <span class="chip">design gráfico</span>
+        <span class="chip">artes visuais</span>
+        <span class="chip">lógica de programação</span>
+        <span class="chip">TADS · IFNMG</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="perf"><span>araçuaí, mg</span><span>estudante tads</span><span>em construção</span></div>
+
+  <section id="sobre">
+    <div class="sec-head"><span class="sec-num">01</span><h2 class="sec-title">Ficha técnica</h2></div>
+    <div class="ficha">
+      <div>
+        <p>Sou estudante de Análise e Desenvolvimento de Sistemas no IFNMG — Campus Araçuaí. Antes disso, e ao lado disso, sempre trabalhei com design gráfico e artes visuais.</p>
+        <p>Não separo essas duas coisas. Uso raciocínio lógico pra estruturar problema, e uso repertório visual pra dar forma e identidade a esse problema resolvido. É a mesma peça, dois lados costurados juntos.</p>
+      </div>
+      <div class="spec">
+        <div class="spec-title">especificações</div>
+        <div class="spec-row"><span class="k">curso</span><span>TADS</span></div>
+        <div class="spec-row"><span class="k">instituição</span><span>IFNMG · Araçuaí</span></div>
+        <div class="spec-row"><span class="k">frentes</span><span>design + dev</span></div>
+        <div class="spec-row"><span class="k">origem</span><span>Minas Gerais</span></div>
+        <div class="spec-row"><span class="k">edição</span><span>2026</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head"><span class="sec-num">02</span><h2 class="sec-title">Patches</h2></div>
+    <div class="patches-wrap">
+      <div class="patch-panel design" data-side="visual">
+        <div class="patch-list">
+          <span class="patch">identidade visual</span>
+          <span class="patch">tipografia</span>
+          <span class="patch">composição</span>
+          <span class="patch">artes gráficas</span>
+          <span class="patch">edição de imagem</span>
+        </div>
+      </div>
+      <div class="patch-panel logic" data-side="sistema">
+        <div class="patch-list">
+          <span class="patch">C++</span>
+          <span class="patch">lógica de programação</span>
+          <span class="patch">estrutura de dados</span>
+          <span class="patch">resolução de problemas</span>
+          <span class="patch">análise de sistemas</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projetos">
+    <div class="sec-head"><span class="sec-num">03</span><h2 class="sec-title">Peças da coleção</h2></div>
+    <div class="tags-grid">
+      <div class="hangtag">
+        <div class="hole"></div>
+        <div class="idx">peça 01</div>
+        <h3>Nome do projeto</h3>
+        <p>Descreva o problema, o processo e o resultado dessa peça.</p>
+        <span class="ext">.fig</span>
+      </div>
+      <div class="hangtag">
+        <div class="hole"></div>
+        <div class="idx">peça 02</div>
+        <h3>Nome do projeto</h3>
+        <p>Ferramentas usadas, contexto e o que foi entregue no final.</p>
+        <span class="ext">.cpp</span>
+      </div>
+      <div class="hangtag">
+        <div class="hole"></div>
+        <div class="idx">peça 03</div>
+        <h3>Nome do projeto</h3>
+        <p>Espaço pra um projeto que junte design e lógica ao mesmo tempo.</p>
+        <span class="ext">.psd</span>
+      </div>
+    </div>
+  </section>
+
+  <section id="formacao">
+    <div class="sec-head"><span class="sec-num">04</span><h2 class="sec-title">Certificado</h2></div>
+    <div class="cert">
+      <div class="cert-stamp">em<br>curso</div>
+      <div>
+        <h3>Análise e Desenvolvimento de Sistemas</h3>
+        <p>IFNMG — Campus Araçuaí</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="contato">
+    <div class="sec-head"><span class="sec-num">05</span><h2 class="sec-title">Contato</h2></div>
+    <div class="ticket">
+      <div>
+        <h2>Bora trocar ideia</h2>
+        <p>Aberta a projetos, colaborações e parcerias que misturem design e tecnologia.</p>
+      </div>
+      <div class="ticket-links">
+        <a href="mailto:seuemail@exemplo.com">seuemail@exemplo.com</a>
+        <a href="#">instagram ↗</a>
+        <a href="#">linkedin ↗</a>
+        <a href="#">github ↗</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>leticia nepomuceno — coleção pessoal — todos os direitos reservados</footer>
+
+</body>
+</html>
